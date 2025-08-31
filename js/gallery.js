@@ -64,10 +64,24 @@ const images = [
   },
 ];
 const listGallery = document.querySelector(".gallery");
+listGallery.addEventListener("click", selectGallery);
+
+function selectGallery(event) {
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+  const linkBigImg = event.target.dataset.source;
+  const instance = basicLightbox.create(
+    `<img src="${linkBigImg}" width="1112" height="640">`
+  );
+  instance.show();
+}
 
 function createGalleryElement(images) {
-  const resultElement = images.map(({ preview, original, description }) => {
-    return `
+  const resultElement = images
+    .map(({ preview, original, description }) => {
+      return `
         <li class="gallery-item">
             <a class="gallery-link" href="${original}">
                 <img
@@ -81,7 +95,8 @@ function createGalleryElement(images) {
             </a>
         </li>
         `;
-  }).join('');
+    })
+    .join("");
   listGallery.innerHTML = resultElement;
 }
 createGalleryElement(images);

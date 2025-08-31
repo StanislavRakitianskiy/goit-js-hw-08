@@ -24,3 +24,9 @@ ul {
     row-gap: 24px;
     column-gap: 24px;
 }
+.gallery-item {
+ transition: transform 250ms ease-in-out; 
+}
+.gallery-item:hover {
+  transform: scale(1.1);
+}
